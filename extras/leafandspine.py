@@ -170,14 +170,14 @@ def config(opts):
     fanout = opts.fanout
     controller = opts.controller
     collector = opts.collector
-    (ifname, agent) = getIfInfo(collector)
+#(ifname, agent) = getIfInfo(collector)
     topo = LeafAndSpine(spine=spine, leaf=leaf, fanout=fanout)
     net = Mininet(topo=topo, link=TCLink, controller=lambda name: RemoteController(name, ip=controller))
     net.start()
-    configMulticast(spine=spine, leaf=leaf, fanout=fanout)
-    configUnicast(net=net, spine=spine, leaf=leaf, fanout=fanout)
-    configSFlow(spine=spine, leaf=leaf, collector=collector, ifname=ifname)
-    dumpTopology(net=net, agent=agent, topofile=opts.topofile)
+#configMulticast(spine=spine, leaf=leaf, fanout=fanout)
+#configUnicast(net=net, spine=spine, leaf=leaf, fanout=fanout)
+#configSFlow(spine=spine, leaf=leaf, collector=collector, ifname=ifname)
+#dumpTopology(net=net, agent=agent, topofile=opts.topofile)
     CLI(net)
     net.stop()
     
