@@ -54,11 +54,11 @@ class LeafAndSpine(Topo):
         # Initialize  spine switches
         spines = {}
         for s in range(spine):
-            spines[s] = self.addSwitch('s%s' % (s + 1))
+            spines[s] = self.addSwitch('s%s' % (s + 1), protocols='OpenFlow13')
         # set link speeds to 10Mb/s
         linkopts = dict(bw=10)
         for ls in range(leaf):
-            leafSwitch = self.addSwitch('s%s' % (spine+ls+1))
+            leafSwitch = self.addSwitch('s%s' % (spine+ls+1), protocols='OpenFlow13')
             # now connect the leaf to all the spines
             for s in range(spine):
                 switch = spines[s]
