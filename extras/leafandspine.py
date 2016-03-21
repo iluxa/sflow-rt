@@ -30,6 +30,8 @@ def parseOptions():
         help='IP address of sFlow collector, default=127.0.0.1')
     parser.add_option('--controller', dest='controller', default='127.0.0.1',
         help='IP address of controller, default=127.0.0.1')
+    parser.add_option('--controller-port', dest='controller_port',type=int, default=6633,
+        help='controller port, default=6633')
     parser.add_option('--topofile', dest='topofile', default='topology.txt',
         help='file used to write out topology, default topology.txt')
     (options, args) = parser.parse_args()
@@ -169,10 +171,11 @@ def config(opts):
     leaf = opts.leaf
     fanout = opts.fanout
     controller = opts.controller
+    controller_port = opts.controller_port
     collector = opts.collector
 #(ifname, agent) = getIfInfo(collector)
     topo = LeafAndSpine(spine=spine, leaf=leaf, fanout=fanout)
-    net = Mininet(topo=topo, link=TCLink, controller=lambda name: RemoteController(name, ip=controller))
+    net = Mininet(topo=topo, link=TCLink, controller=lambda name: RemoteController(name, ip=controller, port=controller_port))
     net.start()
 #configMulticast(spine=spine, leaf=leaf, fanout=fanout)
 #configUnicast(net=net, spine=spine, leaf=leaf, fanout=fanout)
